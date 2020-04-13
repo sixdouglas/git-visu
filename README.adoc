@@ -1,0 +1,31 @@
+= Git Visu
+Douglas SIX - https://github.com/sixdouglas
+v1.0, 2020-04-13
+:toc: left
+:homepage: https://github.com/sixdouglas/git-visu
+:source-highlighter: pygments
+:icons: font
+
+This application allows you to view, for each server in each environment,
+which version of every Artifact is deployed.
+
+It is composed of two different applications:
+
+* `git-visu-back` is a Kotlin Spring Boot Reactive Back-End application
+* `git-visu-front` is a npm VueJS Front-End application
+
+For the deployment, one single Spring-Boot FAT jar is generated including
+the production compiled front app in the back app artifact.
+
+include::git-visu-back/README.adoc[leveloffset=+1]
+
+include::git-visu-front/README.adoc[leveloffset=+1]
+
+== Running the main project
+
+ java -jar -Dspring.profiles.active=test git-visu-back-1.0.0-SNAPSHOT.jar
+
+[NOTE]
+I set the `test` profile here is to set Postgresql port to `54320` and define
+Spring Security `user` and `password`
+

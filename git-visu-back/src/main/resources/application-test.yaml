@@ -1,0 +1,12 @@
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:54320/git_visu_db
+  security:
+    user:
+      name: git_user
+      password: 861d^d681-da0db70c
+logging:
+  level:
+    ROOT: info
+    org.springframework: info

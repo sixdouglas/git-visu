@@ -1,0 +1,52 @@
+@startuml
+
+class Artifact {
+    - id
+    - name
+}
+
+class Build {
+    - id
+    - name
+    - branch
+    - buildDate
+}
+
+class Deployment {
+    - id
+    - deploymentDate
+}
+
+class Environment {
+    - id
+    - name
+    - color
+}
+
+class Installation {
+    - id
+    - port
+    - profile
+}
+
+class Module {
+    - id
+    - name
+}
+
+class Server {
+    - id
+    - name
+    - fullName
+    - role
+}
+
+Environment *-- Server
+Module *-- Build
+Module *-right- Artifact
+Artifact *-- Installation
+Server *-- Installation
+Build *-- Deployment
+Installation *-- Deployment
+
+@enduml

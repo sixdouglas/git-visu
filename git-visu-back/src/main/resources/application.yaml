@@ -1,0 +1,10 @@
+server:
+  port: 9010
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/git_visu_db
+    username: git_visu_user
+    password: git_visu_pwd
+  jmx:
+    enabled: false

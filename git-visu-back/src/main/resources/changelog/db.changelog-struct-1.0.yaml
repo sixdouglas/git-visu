@@ -1,0 +1,375 @@
+databaseChangeLog:
+  - changeSet:
+      id: S_00001
+      author: sixdouglas
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: environment_pkey
+                  name: id
+                  type: int
+              - column:
+                  name: name
+                  type: VARCHAR(100)
+              - column:
+                  name: color
+                  type: VARCHAR(7)
+              - column:
+                  name: code
+                  type: VARCHAR(7)
+              - column:
+                  name: weight
+                  type: int
+            tableName: environment
+  - changeSet:
+      id: S_00002
+      author: sixdouglas
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: server_pkey
+                  name: id
+                  type: int
+              - column:
+                  name: name
+                  type: VARCHAR(50)
+              - column:
+                  name: full_name
+                  type: VARCHAR(100)
+              - column:
+                  name: role
+                  type: VARCHAR(50)
+              - column:
+                  name: environment_id
+                  type: int
+            tableName: server
+  - changeSet:
+      id: S_00003
+      author: sixdouglas
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: fk_server_environment
+            baseColumnNames: environment_id
+            baseTableName: server
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: environment
+            validate: true
+  - changeSet:
+      id: S_00004
+      author: sixdouglas
+      changes:
+        - createIndex:
+            clustered: true
+            columns:
+              - column:
+                  name: environment_id
+            indexName: idx_server
+            tableName: server
+            unique: false
+  - changeSet:
+      id: S_00005
+      author: sixdouglas
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: module_pkey
+                  name: id
+                  type: int
+              - column:
+                  name: name
+                  type: VARCHAR(50)
+              - column:
+                  name: code
+                  type: VARCHAR(50)
+            tableName: module
+  - changeSet:
+      id: S_00006
+      author: sixdouglas
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: artifact_pkey
+                  name: id
+                  type: int
+              - column:
+                  name: name
+                  type: VARCHAR(50)
+              - column:
+                  name: module_id
+                  type: int
+            tableName: artifact
+  - changeSet:
+      id: S_00007
+      author: sixdouglas
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: fk_artifact_module
+            baseColumnNames: module_id
+            baseTableName: artifact
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: module
+            validate: true
+  - changeSet:
+      id: S_00008
+      author: sixdouglas
+      changes:
+        - createIndex:
+            clustered: true
+            columns:
+              - column:
+                  name: module_id
+            indexName: idx_artifact
+            tableName: artifact
+            unique: false
+  - changeSet:
+      id: S_00009
+      author: sixdouglas
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: build_pkey
+                  name: id
+                  type: int
+              - column:
+                  name: name
+                  type: VARCHAR(50)
+              - column:
+                  name: branch
+                  type: VARCHAR(50)
+              - column:
+                  name: build_date
+                  type: timestamp with time zone
+              - column:
+                  name: module_id
+                  type: int
+            tableName: build
+  - changeSet:
+      id: S_00010
+      author: sixdouglas
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: fk_build_module
+            baseColumnNames: module_id
+            baseTableName: build
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: module
+            validate: true
+  - changeSet:
+      id: S_00011
+      author: sixdouglas
+      changes:
+        - createIndex:
+            clustered: true
+            columns:
+              - column:
+                  name: module_id
+            indexName: idx_build
+            tableName: build
+            unique: false
+
+  - changeSet:
+      id: S_00012
+      author: sixdouglas
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: installation_pkey
+                  name: id
+                  type: int
+              - column:
+                  name: artifact_id
+                  type: int
+              - column:
+                  name: server_id
+                  type: int
+              - column:
+                  name: port
+                  type: int
+              - column:
+                  name: profile
+                  type: VARCHAR(50)
+            tableName: installation
+  - changeSet:
+      id: S_00013
+      author: sixdouglas
+      changes:
+        - createIndex:
+            clustered: true
+            columns:
+              - column:
+                  name: artifact_id
+              - column:
+                  name: server_id
+              - column:
+                  name: port
+            indexName: idx_installation
+            tableName: installation
+            unique: true
+  - changeSet:
+      id: S_00014
+      author: sixdouglas
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: fk_installation_artifact
+            baseColumnNames: artifact_id
+            baseTableName: installation
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: artifact
+            validate: true
+  - changeSet:
+      id: S_00015
+      author: sixdouglas
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: fk_installation_server
+            baseColumnNames: server_id
+            baseTableName: installation
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: server
+            validate: true
+  - changeSet:
+      id: S_00016
+      author: sixdouglas
+      changes:
+        - createIndex:
+            clustered: true
+            columns:
+              - column:
+                  name: artifact_id
+            indexName: idx_installation_1
+            tableName: installation
+            unique: false
+  - changeSet:
+      id: S_00017
+      author: sixdouglas
+      changes:
+        - createIndex:
+            clustered: true
+            columns:
+              - column:
+                  name: server_id
+            indexName: idx_installation_2
+            tableName: installation
+            unique: false
+
+  - changeSet:
+      id: S_00018
+      author: sixdouglas
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: deployment_pkey
+                  name: id
+                  type: int
+              - column:
+                  name: build_id
+                  type: int
+              - column:
+                  name: installation_id
+                  type: int
+              - column:
+                  name: deployment_date
+                  type: timestamp with time zone
+            tableName: deployment
+  - changeSet:
+      id: S_00019
+      author: sixdouglas
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: fk_deployment_installation
+            baseColumnNames: installation_id
+            baseTableName: deployment
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: installation
+            validate: true
+  - changeSet:
+      id: S_00020
+      author: sixdouglas
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: fk_deployment_build
+            baseColumnNames: build_id
+            baseTableName: deployment
+            deferrable: true
+            initiallyDeferred: true
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: build
+            validate: true
+  - changeSet:
+      id: S_00021
+      author: sixdouglas
+      changes:
+        - createIndex:
+            clustered: true
+            columns:
+              - column:
+                  name: installation_id
+            indexName: idx_deployment_1
+            tableName: deployment
+            unique: false
+  - changeSet:
+      id: S_00022
+      author: sixdouglas
+      changes:
+        - createIndex:
+            clustered: true
+            columns:
+              - column:
+                  name: build_id
+            indexName: idx_deployment_2
+            tableName: deployment
+            unique: false

@@ -1,0 +1,11 @@
+name,color,code,weight
+Pre Production,#F5B041,pprod,50
+Production,#CD6155,prd,60
+Development,#58D68D,dev,10
+Integration,#5DADE2,int,30
+UAT,#D7BDE2,uat,40
+Debug MCO,#E6B0AA,mco,55
+Test,#16A085,test,20
+SMART,#5DADE2,smart,33
+Vanilla Int,#5DADE2, vanint,37
+Vanilla UAT,#D7BDE2, vanuat,43

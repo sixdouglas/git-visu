@@ -1,0 +1,83 @@
+= Git Visu Back End
+:icons: font
+:source-highlighter: pygments
+
+Create Postgres Instance and run it:
+
+[source,bash]
+----
+$ docker run --name pg-11-git-visu \
+        -e POSTGRES_PASSWORD=git_visu_pwd \
+        -e POSTGRES_USER=git_visu_user \
+        -e POSTGRES_DB=git_visu_db \
+        -p 54320:5432 \
+        -d postgres:11
+----
+
+Stop Docker:
+
+[source,bash]
+----
+$ docker stop pg-11-git-visu
+----
+
+Delete Docker container:
+
+[source,bash]
+----
+$ docker rm pg-11-git-visu
+----
+
+Run Liquibase:
+
+[source,bash]
+----
+$ mvn clean compile liquibase:update
+----
+
+Run Spring Boot:
+
+[source,bash]
+----
+$ mvn spring-boot:run -Dspring.profiles.active=test,dev
+----
+
+[NOTE]
+The `dev` profile is used to allow API Calls from the `front` when run locally using the node server.
+
+== Domain Model
+
+[plantuml,model,svg,align="center"]
+----
+include::./src/main/doc/model.puml[]
+----
+
+== Application usage
+
+In order to make this app works, you need to add :
+
+- Environments
+- Servers
+- Modules
+- Artifacts
+- Installations
+
+To do it, you can fill the csv files and run the Liquibase task.
+
+Then plug your CI in to add the Builds using this curl request:
+
+[source,bash]
+----
+$ curl --request POST --header "Content-Type: application/json" \
+        --data '{"name": "4.0.1", "branch": "master", "buildDate": "2020-04-02T12:16:35.613000", "moduleCode": "CORE"}' \
+        http://localhost:9010/builds
+----
+
+Finally, plug your Deployment in to add the Deployment using this curl request:
+
+[source,bash]
+----
+$ curl --request POST --header "Content-Type: application/json" \
+        --data '{"moduleCode": "CORE", "buildName": "4.0.0", "artifactName": "APP_GHA-WEBAPP-DIST_CORP", "serverName": "rhmbuasghaa01", "deploymentDate": "2020-04-03T12:16:35.613000"}' \
+        http://localhost:9010/deployments
+----

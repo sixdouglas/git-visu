@@ -1,0 +1,189 @@
+databaseChangeLog:
+  - changeSet:
+      id: D_00001
+      author: sixdouglas
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  name: id
+                  type: NUMERIC
+              - column:
+                  name: name
+                  type: STRING
+              - column:
+                  name: color
+                  type: STRING
+              - column:
+                  name: code
+                  type: STRING
+              - column:
+                  name: weight
+                  type: NUMERIC
+            commentLineStartsWith: A String
+            encoding: UTF-8
+            file: data/environment.csv
+            quotchar: ''''
+            relativeToChangelogFile: true
+            separator: ','
+            tableName: environment
+            usePreparedStatements: true
+  - changeSet:
+      id: D_00002
+      author: sixdouglas
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  name: id
+                  type: NUMERIC
+              - column:
+                  name: name
+                  type: STRING
+              - column:
+                  name: full_name
+                  type: STRING
+              - column:
+                  name: role
+                  type: STRING
+              - column:
+                  name: environment_id
+                  type: NUMERIC
+            commentLineStartsWith: A String
+            encoding: UTF-8
+            file: data/server.csv
+            quotchar: ''''
+            relativeToChangelogFile: true
+            separator: ','
+            tableName: server
+            usePreparedStatements: true
+  - changeSet:
+      id: D_00003
+      author: sixdouglas
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  name: id
+                  type: NUMERIC
+              - column:
+                  name: name
+                  type: STRING
+              - column:
+                  name: code
+                  type: STRING
+            commentLineStartsWith: A String
+            encoding: UTF-8
+            file: data/module.csv
+            quotchar: ''''
+            relativeToChangelogFile: true
+            separator: ','
+            tableName: module
+            usePreparedStatements: true
+  - changeSet:
+      id: D_00004
+      author: sixdouglas
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  name: id
+                  type: NUMERIC
+              - column:
+                  name: name
+                  type: STRING
+              - column:
+                  name: module_id
+                  type: NUMERIC
+            commentLineStartsWith: A String
+            encoding: UTF-8
+            file: data/artifact.csv
+            quotchar: ''''
+            relativeToChangelogFile: true
+            separator: ','
+            tableName: artifact
+            usePreparedStatements: true
+  - changeSet:
+      id: D_00005
+      author: sixdouglas
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  name: id
+                  type: NUMERIC
+              - column:
+                  name: name
+                  type: STRING
+              - column:
+                  name: branch
+                  type: STRING
+              - column:
+                  name: build_date
+                  type: TIMESTAMP
+              - column:
+                  name: module_id
+                  type: NUMERIC
+            commentLineStartsWith: A String
+            encoding: UTF-8
+            file: data/build.csv
+            quotchar: ''''
+            relativeToChangelogFile: true
+            separator: ','
+            tableName: build
+            usePreparedStatements: true
+  - changeSet:
+      id: D_00006
+      author: sixdouglas
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  name: id
+                  type: NUMERIC
+              - column:
+                  name: server_id
+                  type: NUMERIC
+              - column:
+                  name: artifact_id
+                  type: NUMERIC
+              - column:
+                  name: port
+                  type: NUMERIC
+              - column:
+                  name: profile
+                  type: STRING
+            commentLineStartsWith: A String
+            encoding: UTF-8
+            file: data/installation.csv
+            quotchar: ''''
+            relativeToChangelogFile: true
+            separator: ','
+            tableName: installation
+            usePreparedStatements: true
+  - changeSet:
+      id: D_00007
+      author: sixdouglas
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  name: id
+                  type: NUMERIC
+              - column:
+                  name: build_id
+                  type: NUMERIC
+              - column:
+                  name: installation_id
+                  type: NUMERIC
+              - column:
+                  name: deployment_date
+                  type: TIMESTAMP
+            commentLineStartsWith: A String
+            encoding: UTF-8
+            file: data/deployment.csv
+            quotchar: ''''
+            relativeToChangelogFile: true
+            separator: ','
+            tableName: deployment
+            usePreparedStatements: true
