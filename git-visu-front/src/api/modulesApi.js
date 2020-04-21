@@ -1,24 +1,24 @@
 import axios from 'axios';
 
 export default {
-    getEnvironments() {
-        const url = `${process.env.VUE_APP_BASE_URL}/environments`;
+    getModules() {
+        const url = `${process.env.VUE_APP_BASE_URL}/modules`;
         return axios.get(url).then(response => response.data).catch(err =>  err || 'Unable to retrieve data');
     },
 
-    getEnvironmentServers(environmentId) {
-        const url = `${process.env.VUE_APP_BASE_URL}/environments/` + environmentId + `/servers`;
+    getModuleArtifacts(moduleId) {
+        const url = `${process.env.VUE_APP_BASE_URL}/modules/` + moduleId + `/artifacts`;
         return axios.get(url).then(response => response.data).catch(err =>  err || 'Unable to retrieve data');
     },
 
-    deleteEnvironment(environmentId) {
-        const url = `${process.env.VUE_APP_BASE_URL}/environments/` + environmentId ;
+    deleteModule(moduleId) {
+        const url = `${process.env.VUE_APP_BASE_URL}/modules/` + moduleId ;
         return axios.delete(url).then(response => response.data).catch(err =>  err || 'Unable to save data');
     },
 
-    addEnvironment(environment) {
-        const url = `${process.env.VUE_APP_BASE_URL}/environments/`;
-        return axios.post(url, environment, {
+    addModule(module) {
+        const url = `${process.env.VUE_APP_BASE_URL}/modules/`;
+        return axios.post(url, module, {
             headers: {
                 "Accept": "application/json",
                 "Content-type": "application/json"
@@ -26,9 +26,9 @@ export default {
         }).then(response => response.data).catch(err =>  err || 'Unable to save data');
     },
 
-    updateEnvironment(environment) {
-        const url = `${process.env.VUE_APP_BASE_URL}/environments/` + environment.id ;
-        return axios.put(url, environment, {
+    updateModule(module) {
+        const url = `${process.env.VUE_APP_BASE_URL}/modules/` + module.id ;
+        return axios.put(url, module, {
             headers: {
                 "Accept": "application/json",
                 "Content-type": "application/json"

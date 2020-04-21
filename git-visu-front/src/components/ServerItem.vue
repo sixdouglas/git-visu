@@ -38,9 +38,10 @@
         },
         computed: {
             getSortedServerDeployments(){
-                return _.orderBy(this.getServerDeployments(this.environmentId.valueOf(), this.serverId.valueOf()), ['moduleName', 'artifactName'], ['asc'])
+                return _.orderBy(this.getServerDeployments(this.serverId.valueOf()), ['moduleName', 'artifactName'], ['asc'])
             },
             ...mapGetters({
+                isServerDeploymentsLoaded: 'environments/isServerDeploymentsLoaded',
                 getServerDeployments: 'environments/getServerDeployments'
             })
         },
@@ -53,7 +54,9 @@
                 }
             },
             fetchDeployment() {
-                this.$store.dispatch('environments/findServerDeployments', {environmentId: this.environmentId.valueOf(), serverId: this.serverId.valueOf()})
+                if (!this.isServerDeploymentsLoaded(this.serverId.valueOf())){
+                    this.$store.dispatch('environments/findServerDeployments', {environmentId: this.environmentId.valueOf(), serverId: this.serverId.valueOf()})
+                }
             }
         }
     }

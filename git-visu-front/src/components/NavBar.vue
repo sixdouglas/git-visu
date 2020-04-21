@@ -10,7 +10,7 @@
                     <router-link to="/environments" class="nav-link" active-class="active">Environments</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link to="/builds" class="nav-link" active-class="active">Builds</router-link>
+                    <router-link to="/modules" class="nav-link" active-class="active">Modules</router-link>
                 </li>
             </ul>
         </div>
