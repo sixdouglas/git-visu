@@ -16,7 +16,16 @@ class ServerDeploymentService(val client: DatabaseClient) {
                 " inner join installation ins on ins.server_id = srv.id " +
                 " inner join artifact art on art.id = ins.artifact_id " +
                 " inner join module mod on mod.id = art.module_id " +
-                " left outer join deployment dep on dep.installation_id = ins.id " +
+                " left outer join deployment dep on " +
+                           " dep.installation_id = ins.id " +
+                       " and dep.id = ( " +
+                           " select dep_1.id " +
+                           " from installation ins_1 " +
+                                " inner join deployment dep_1 on dep_1.installation_id = ins_1.id " +
+                           " where ins.id = ins_1.id " +
+                           " order by dep_1.deployment_date " +
+                           " limit 1 " +
+                       " ) " +
                 " left outer join build bui on bui.id = dep.build_id and bui.module_id = mod.id " +
             "where srv.id = :serverId " +
             "order by dep.deployment_date desc"

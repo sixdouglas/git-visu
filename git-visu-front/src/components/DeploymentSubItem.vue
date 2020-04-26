@@ -1,14 +1,14 @@
 <template>
     <div class="list-group-item list-group-item-action">
         <div class="row">
-            <span class="col-sm-12 sname">{{moduleName}} :: {{artifactName}}</span>
+            <span class="col-sm-12 name">{{moduleName}} :: {{artifactName}}</span>
         </div>
         <div class="row">
-            <span class="col-sm-12 srole">{{port}}[{{profile}}]</span>
+            <span class="col-sm-6 port">{{port}}[{{profile}}]</span>
+            <span class="col-sm-6 date">{{formattedDeploymentDate}}</span>
         </div>
         <div class="row">
-            <span class="col-sm-6 srole">{{branch}}/{{buildName}}</span>
-            <span class="col-sm-6 build">{{formattedDeploymentDate}}</span>
+            <span class="col-sm-12 build">{{branch}}/{{buildName}}</span>
         </div>
     </div>
 </template>
@@ -38,16 +38,19 @@
 </script>
 
 <style scoped>
-    .sname {
+    .name {
         font-size: .6rem;
         font-weight: bold;
     }
-    .srole {
+    .port, .date {
         font-size: .6rem;
     }
-    .build {
-        font-size: .6rem;
+    .date {
         text-align: right;
+    }
+    .build {
+        font-size: .5rem;
+        text-align: center;
     }
     .list-group-item {
         padding: .2rem;

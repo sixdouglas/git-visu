@@ -2,6 +2,7 @@ package org.sixdouglas.git.config
 
 import org.sixdouglas.git.artifact.ArtifactHandler
 import org.sixdouglas.git.build.BuildHandler
+import org.sixdouglas.git.deployment.DeploymentHandler
 import org.sixdouglas.git.environment.EnvironmentHandler
 import org.sixdouglas.git.module.ModuleHandler
 import org.sixdouglas.git.server.ServerHandler
@@ -25,6 +26,7 @@ class RoutingConfiguration {
             environmentHandler: EnvironmentHandler,
             moduleHandler: ModuleHandler,
             serverHandler: ServerHandler,
+            deploymentHandler: DeploymentHandler,
             @Value("classpath:/static/index.html") html: Resource
     ): RouterFunction<ServerResponse> = router {
         accept(TEXT_HTML).nest {
@@ -67,10 +69,10 @@ class RoutingConfiguration {
                 DELETE("/{serverId}", serverHandler::deleteServer)
             }
             "/deployments".nest {
-                GET("/", serverHandler::getServers)
-                POST("/", serverHandler::addServer)
-                PUT("/{deploymentId}", serverHandler::updateServer)
-                DELETE("/{deploymentId}", serverHandler::deleteServer)
+                GET("/", deploymentHandler::getDeployments)
+                POST("/", deploymentHandler::addDeployment)
+                PUT("/{deploymentId}", deploymentHandler::updateDeployment)
+                DELETE("/{deploymentId}", deploymentHandler::deleteDeployment)
             }
         }
         resources("/**", ClassPathResource("static/"))
