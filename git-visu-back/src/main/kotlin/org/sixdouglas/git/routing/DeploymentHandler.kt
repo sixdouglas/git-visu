@@ -1,5 +1,8 @@
-package org.sixdouglas.git.deployment
+package org.sixdouglas.git.routing
 
+import org.sixdouglas.git.deployment.ArtifactDeployment
+import org.sixdouglas.git.deployment.Deployment
+import org.sixdouglas.git.deployment.DeploymentComponent
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
@@ -7,7 +10,7 @@ import org.springframework.web.reactive.function.server.ServerResponse
 import reactor.core.publisher.Mono
 
 @Component
-class DeploymentHandler (val deploymentService: DeploymentService) {
+internal class DeploymentHandler internal constructor (internal val deploymentService: DeploymentComponent) {
     fun getDeployments(deploymentRequest: ServerRequest): Mono<out ServerResponse> {
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(deploymentService.getDeployments(), Deployment::class.java)
     }

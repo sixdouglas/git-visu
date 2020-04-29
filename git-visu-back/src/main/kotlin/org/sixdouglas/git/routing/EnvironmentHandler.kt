@@ -1,5 +1,7 @@
-package org.sixdouglas.git.environment
+package org.sixdouglas.git.routing
 
+import org.sixdouglas.git.environment.Environment
+import org.sixdouglas.git.environment.EnvironmentComponent
 import org.sixdouglas.git.server.Server
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
@@ -8,7 +10,7 @@ import org.springframework.web.reactive.function.server.ServerResponse
 import reactor.core.publisher.Mono
 
 @Component
-class EnvironmentHandler (val environmentService: EnvironmentService) {
+internal class EnvironmentHandler internal constructor (internal val environmentService: EnvironmentComponent) {
     fun getEnvironments(serverRequest: ServerRequest): Mono<out ServerResponse> {
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(environmentService.getEnvironments(), Environment::class.java)
     }

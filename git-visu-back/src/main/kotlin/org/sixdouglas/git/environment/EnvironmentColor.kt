@@ -3,7 +3,7 @@ package org.sixdouglas.git.environment
 /**
  * Colors and names are picked from here: https://htmlcolorcodes.com/color-chart/flat-design-color-chart/
  */
-object EnvironmentColor {
+internal object EnvironmentColor {
     val colors: ArrayList<String> = arrayListOf(
             "#F9EBEA", "#F2D7D5", "#E6B0AA", "#D98880", "#CD6155", "#C0392B", "#A93226", "#922B21", "#7B241C", "#641E16", // POMEGRANATE
             "#FDEDEC", "#FADBD8", "#F5B7B1", "#F1948A", "#EC7063", "#E74C3C", "#CB4335", "#B03A2E", "#943126", "#78281F", // ALIZARIN

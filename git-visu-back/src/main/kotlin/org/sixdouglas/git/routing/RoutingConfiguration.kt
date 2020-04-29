@@ -1,11 +1,5 @@
-package org.sixdouglas.git.config
+package org.sixdouglas.git.routing
 
-import org.sixdouglas.git.artifact.ArtifactHandler
-import org.sixdouglas.git.build.BuildHandler
-import org.sixdouglas.git.deployment.DeploymentHandler
-import org.sixdouglas.git.environment.EnvironmentHandler
-import org.sixdouglas.git.module.ModuleHandler
-import org.sixdouglas.git.server.ServerHandler
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -20,7 +14,7 @@ import org.springframework.web.reactive.function.server.router
 @Configuration
 class RoutingConfiguration {
     @Bean
-    fun routerFunction(
+    internal fun routerFunction(
             artifactHandler: ArtifactHandler,
             buildHandler: BuildHandler,
             environmentHandler: EnvironmentHandler,
@@ -54,8 +48,8 @@ class RoutingConfiguration {
                 DELETE("/{environmentId}", environmentHandler::deleteEnvironment)
             }
             "/modules".nest {
-                GET("/{moduleId}/artifacts", moduleHandler::getModuleArtifacts)
-                GET("/{moduleId}/builds", moduleHandler::getModuleBuilds)
+                GET("/{moduleId}/artifacts", artifactHandler::getModuleArtifacts)
+                GET("/{moduleId}/builds", buildHandler::getModuleBuilds)
                 GET("/", moduleHandler::getModules)
                 POST("/", moduleHandler::addModule)
                 PUT("/{moduleId}", moduleHandler::updateModule)

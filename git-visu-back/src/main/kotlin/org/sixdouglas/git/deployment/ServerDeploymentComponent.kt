@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 
 @Service
-class ServerDeploymentService(val client: DatabaseClient) {
+internal class ServerDeploymentComponent internal constructor(internal val client: DatabaseClient) : IServerDeploymentComponent {
     val query = "select srv.id server_id, " +
                       " mod.id module_id, mod.name module_name, " +
                       " art.id artifact_id, art.name artifact_name, " +
@@ -19,18 +19,16 @@ class ServerDeploymentService(val client: DatabaseClient) {
                 " left outer join deployment dep on " +
                            " dep.installation_id = ins.id " +
                        " and dep.id = ( " +
-                           " select dep_1.id " +
+                           " select max(dep_1.id) " +
                            " from installation ins_1 " +
                                 " inner join deployment dep_1 on dep_1.installation_id = ins_1.id " +
                            " where ins.id = ins_1.id " +
-                           " order by dep_1.deployment_date " +
-                           " limit 1 " +
                        " ) " +
                 " left outer join build bui on bui.id = dep.build_id and bui.module_id = mod.id " +
             "where srv.id = :serverId " +
             "order by dep.deployment_date desc"
 
-    fun findLatestDeploymentsForServer(serverId: Int): Flux<ServerDeployment> {
+    override fun findLatestDeploymentsForServer(serverId: Int): Flux<ServerDeployment> {
         return client
                 .execute(query)
                 .bind("serverId", serverId)
