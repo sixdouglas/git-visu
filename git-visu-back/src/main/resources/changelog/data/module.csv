@@ -1,8 +1,8 @@
 name,code
-MAIN,MAIN
-Proxy,PROXY
-Invoice,INV
+Core,CORE
+Secu Proxy,SECU-PROXY
+Invoice,INVOICE
 Transco,TRANSCO
 Talend,TALEND
-DWH,DWH
+Talend DWH,DWH
 Declarative,DECLA
