@@ -1,5 +1,6 @@
 package org.sixdouglas.git.routing
 
+import org.sixdouglas.git.deployment.ActualDeployment
 import org.sixdouglas.git.deployment.ArtifactDeployment
 import org.sixdouglas.git.deployment.Deployment
 import org.sixdouglas.git.deployment.DeploymentComponent
@@ -29,6 +30,10 @@ internal class DeploymentHandler internal constructor (internal val deploymentSe
     fun deleteDeployment(deploymentRequest: ServerRequest): Mono<out ServerResponse> {
         val deploymentId:Int = Integer.valueOf(deploymentRequest.pathVariable("deploymentId"))
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(deploymentService.deleteDeployment(deploymentId), Deployment::class.java)
+    }
+
+    fun actualDeployments(deploymentRequest: ServerRequest): Mono<out ServerResponse> {
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(deploymentService.getActualDeployments(), ActualDeployment::class.java)
     }
 
 }

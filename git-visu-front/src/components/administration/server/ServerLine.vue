@@ -23,7 +23,7 @@
         props: {
             serverId: Number,
             serverName: String,
-            serverRole: String
+            serverRole: Array
         }
     }
 </script>

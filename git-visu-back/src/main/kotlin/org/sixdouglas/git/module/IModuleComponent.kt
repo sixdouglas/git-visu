@@ -1,7 +1,5 @@
 package org.sixdouglas.git.module
 
-import org.sixdouglas.git.artifact.Artifact
-import org.sixdouglas.git.build.Build
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 

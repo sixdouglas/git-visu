@@ -8,6 +8,12 @@
                     <input type="text" class="form-control" id="inputName" v-model="artifact.name">
                 </div>
             </div>
+            <div class="form-group row mb-2 mt-2">
+                <label for="inputName" class="col-sm-2 col-form-label">Role</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputTole" v-model="artifact.role">
+                </div>
+            </div>
             <div class="row justify-content-end">
                 <div class="col-sm-4 text-right">
                     <div v-on:click="save" class="btn btn-primary"><i class="mdi mdi-save"></i> Save</div>

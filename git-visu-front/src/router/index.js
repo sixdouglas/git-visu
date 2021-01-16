@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '../components/Index'
-import Home from '../components/Home'
+import ActualDeployments from '../components/actual/ActualDeployments'
+import Deployments from '../components/deployment/Deployments'
+import Versions from '../components/version/Versions'
 import Environments from '../components/administration/environment/Environments'
 import EnvironmentEdit from '../components/administration/environment/EnvironmentEdit'
 import Servers from "../components/administration/server/Servers";
@@ -21,14 +23,24 @@ export default new Router({
             component: Index
         },
         {
-            path: '/home',
-            name: 'HomeRoute',
-            component: Home
+            path: '/deployments',
+            name: 'DeploymentsRoute',
+            component: Deployments
         },
         {
             path: '/environments',
             name: 'EnvironmentsRoute',
             component: Environments,
+        },
+        {
+            path: '/versions',
+            name: 'VersionsRoute',
+            component: Versions,
+        },
+        {
+            path: '/actualDeployments',
+            name: 'ActualDeploymentsRoute',
+            component: ActualDeployments,
         },
         {
             path: '/environments/:id/edit',

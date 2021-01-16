@@ -1,16 +1,16 @@
 <template>
     <div v-on:click="showOrHide" class="list-group-item list-group-item-action">
         <div class="row">
-            <span class="col-sm-6 sname">{{serverName}}</span>
-            <span class="col-sm-6 srole">{{serverRole}}</span>
+            <span class="col-sm-5 sname">{{serverName}}</span>
+            <span class="col-sm-7 srole">{{getRole()}}</span>
         </div>
         <div class="list-group mt-2" v-if="!isHidden">
             <DeploymentSubItem v-for="(deployment) in getSortedServerDeployments" v-bind:key="deployment.deploymentId"
                                v-bind:environment-id="environmentId" v-bind:server-id="serverId"
-                               v-bind:module-name="deployment.moduleName" v-bind:artifact-name="deployment.artifactName"
+                               v-bind:module-name="deployment.moduleName" v-bind:module-code="deployment.moduleCode" v-bind:artifact-name="deployment.artifactName"
                                v-bind:port="deployment.port" v-bind:profile="deployment.profile"
                                v-bind:build-name="deployment.buildName" v-bind:branch="deployment.branch"
-                               v-bind:deployment-date="deployment.deploymentDate"
+                               v-bind:snapshot="deployment.snapshot" v-bind:deployment-date="deployment.deploymentDate"
             />
         </div>
     </div>
@@ -34,7 +34,7 @@
             environmentId: Number,
             serverId: Number,
             serverName: String,
-            serverRole: String
+            serverRole: Array
         },
         computed: {
             getSortedServerDeployments(){
@@ -57,6 +57,9 @@
                 if (!this.isServerDeploymentsLoaded(this.serverId.valueOf())){
                     this.$store.dispatch('environments/findServerDeployments', {environmentId: this.environmentId.valueOf(), serverId: this.serverId.valueOf()})
                 }
+            },
+            getRole() {
+              return this.serverRole.join(", ")
             }
         }
     }

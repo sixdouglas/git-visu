@@ -14,7 +14,7 @@ internal class EnvironmentComponent internal constructor(internal val environmen
             return Mono.error(EnvironmentIdAutomaticallyGeneratedException())
         } else {
             if (environment.color == null || environment.color.isBlank()) {
-                return environmentRepository.save(Environment(null, environment.name, EnvironmentColor.randomColor(), environment.code, environment.weight))
+                return environmentRepository.save(Environment(null, environment.name, EnvironmentColor.randomColor(), environment.code, environment.role, environment.weight))
             } else {
                 return environmentRepository.save(environment)
             }

@@ -1,8 +1,7 @@
 package org.sixdouglas.git.routing
 
-import org.sixdouglas.git.build.Build
+import org.sixdouglas.git.build.*
 import org.sixdouglas.git.build.BuildComponent
-import org.sixdouglas.git.build.ModuleBuild
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
@@ -13,6 +12,10 @@ import reactor.core.publisher.Mono
 internal class BuildHandler internal constructor(internal val buildService: BuildComponent) {
     fun getBuilds(serverRequest: ServerRequest): Mono<out ServerResponse> {
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(buildService.getBuilds(), Build::class.java)
+    }
+    fun getBuildDeployments(serverRequest: ServerRequest): Mono<out ServerResponse> {
+        val buildId:Int = Integer.valueOf(serverRequest.pathVariable("buildId"))
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(buildService.getBuildDeployments(buildId), Environment::class.java)
     }
     fun getModuleBuilds(serverRequest: ServerRequest): Mono<out ServerResponse> {
         val moduleId:Int = Integer.valueOf(serverRequest.pathVariable("moduleId"))

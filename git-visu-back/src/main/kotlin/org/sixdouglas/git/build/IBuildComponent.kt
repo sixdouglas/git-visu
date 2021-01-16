@@ -11,4 +11,6 @@ interface IBuildComponent {
     fun findBuildsByModuleId(id: Int): Flux<Build>
     fun findBuildByNameAndModuleId(buildName: String, moduleId: Int): Mono<Build>
     fun save(build: Build): Mono<out Build>
+
+    fun getBuildDeployments(buildId: Int): Flux<Environment>
 }

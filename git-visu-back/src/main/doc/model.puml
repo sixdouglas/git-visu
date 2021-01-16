@@ -3,6 +3,7 @@
 class Artifact {
     - id
     - name
+    - role
 }
 
 class Build {

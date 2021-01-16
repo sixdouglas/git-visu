@@ -1,9 +1,6 @@
 package org.sixdouglas.git.routing
 
-import org.sixdouglas.git.artifact.Artifact
 import org.sixdouglas.git.artifact.ArtifactComponent
-import org.sixdouglas.git.build.Build
-import org.sixdouglas.git.build.IBuildComponent
 import org.sixdouglas.git.module.Module
 import org.sixdouglas.git.module.IModuleComponent
 import org.springframework.http.MediaType

@@ -167,7 +167,7 @@ const mutations = {
         environment.servers = [...environment.servers, envServer.server.id];
 
         let newServers = {...state.servers};
-        newServers[envServer.server.id] = envServer.server;
+        newServers[envServer.server.id] = { ...envServer.server, deployments : []};
         state.servers = newServers;
     },
     changeEnvironmentServer(state, envServer) {
@@ -175,7 +175,7 @@ const mutations = {
     },
     removeEnvironmentServer(state, envServer) {
         const environment = state.environments[envServer.environmentId];
-        const srvIndex = environment.servers.findIndex(srv => srv.id === envServer.server.id);
+        const srvIndex = environment.servers.findIndex(srv => srv === envServer.server.id);
         environment.servers.splice(srvIndex, 1);
 
         Object.keys(state.servers).forEach(function (key) {
@@ -187,7 +187,7 @@ const mutations = {
         let newDeployments = {...state.deployments};
         const server = state.servers[serverDeployment.serverId];
         serverDeployment.deployments.forEach(deployment => {
-            let id = 0;
+            let id;
             if (deployment.deploymentId === undefined || deployment.deploymentId === null) {
                 id = deployment.installationId;
             } else {

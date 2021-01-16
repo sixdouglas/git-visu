@@ -18,7 +18,7 @@ internal class ArtifactComponent internal constructor(internal val artifactRepos
     override fun getArtifacts() = artifactRepository.findAll()
 
     override fun updateArtifact(id: Int, artifact: Artifact): Mono<Artifact> {
-        val artifactToBeSaved = Artifact(id, artifact.name, artifact.moduleId)
+        val artifactToBeSaved = Artifact(id, artifact.name, artifact.moduleId, artifact.role)
         return artifactRepository.save(artifactToBeSaved)
     }
 

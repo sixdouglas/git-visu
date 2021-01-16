@@ -47,6 +47,12 @@
         },
         methods: {
             save: function() {
+                if (this.server.role === undefined || this.server.role === "") {
+                  this.server.role = [];
+                } else if (!Array.isArray(this.server.role)){
+                    this.server.role = this.server.role.split(",");
+                }
+                this.server.role = this.server.role.flatMap(value => value.trim())
                 if (this.isNew) {
                     this.$store.dispatch('environments/addEnvironmentServer', {environmentId: this.$route.query.environmentId, server: this.server })
                         .then(() => { this.$router.push({ name: 'EnvironmentEditWithServersRoute', params: {id : this.$route.query.environmentId }}) })
@@ -70,8 +76,4 @@
 </script>
 
 <style scoped>
-    .frame {
-        border: .2rem solid #f7f7f9;
-        padding: .2rem;
-    }
 </style>

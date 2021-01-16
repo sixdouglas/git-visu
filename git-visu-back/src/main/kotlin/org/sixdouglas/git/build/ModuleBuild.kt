@@ -1,5 +1,5 @@
 package org.sixdouglas.git.build
 
-import java.time.LocalDateTime
+import java.time.OffsetDateTime
 
-data class ModuleBuild(val name: String, val branch: String, val buildDate: LocalDateTime, val moduleCode: String)
+data class ModuleBuild(val name: String, val branch: String, val buildDate: OffsetDateTime, val moduleCode: String)

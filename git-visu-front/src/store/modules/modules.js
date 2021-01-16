@@ -159,7 +159,7 @@ const mutations = {
     },
     removeModuleArtifact(state, envArtifact) {
         const module = state.modules[envArtifact.moduleId];
-        const srvIndex = module.artifacts.findIndex(srv => srv.id === envArtifact.artifact.id);
+        const srvIndex = module.artifacts.findIndex(srv => srv === envArtifact.artifact.id);
         module.artifacts.splice(srvIndex, 1);
 
         Object.keys(state.artifacts).forEach(function (key) {

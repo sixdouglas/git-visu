@@ -1,6 +1,7 @@
 <template>
     <tr>
         <td>{{artifactName}}</td>
+        <td>{{artifactRole}}</td>
         <td class="text-right">
             <router-link :to="{name: 'ArtifactEditRoute', params: {id : artifactId }}">
                 <div class="btn btn-primary btn-sm"><i class="mdi mdi-edit"></i> Edit</div>

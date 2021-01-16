@@ -30,7 +30,7 @@
         },
         computed: {
             getSortedEnvironmentServers(){
-                return _.orderBy(this.getEnvironmentServers(this.environmentId.valueOf()), ['name'], ['asc'])
+                return _.orderBy(this.getEnvironmentServers(this.environmentId.valueOf()), ['role'], ['asc'])
             },
             ...mapGetters({
                 getEnvironmentServers: 'environments/getEnvironmentServers'

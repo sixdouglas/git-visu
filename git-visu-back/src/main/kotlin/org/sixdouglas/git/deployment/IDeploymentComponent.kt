@@ -13,4 +13,5 @@ interface IDeploymentComponent {
     fun getDeployments(): Flux<Deployment>
     fun updateDeployment(id: Int, deployment: Deployment): Mono<Deployment>
     fun deleteDeployment(id: Int): Mono<Void>
+    fun getActualDeployments(): Flux<ActualDeployment>
 }

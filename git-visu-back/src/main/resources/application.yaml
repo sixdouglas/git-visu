@@ -3,8 +3,36 @@ server:
 
 spring:
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/git_visu_db
+    url: r2dbc:pool:postgresql://localhost:5432/git_visu_db
     username: git_visu_user
     password: git_visu_pwd
+    pool:
+      initial-size: 3
+      max-size: 10
+      max-idle-time: 30m
+      validation-query: SELECT 1
+  security:
+    user:
+      name: git_user
+      password: git_pwd
   jmx:
     enabled: false
+
+logging:
+  level:
+    ROOT: info
+    org.springframework: info
+    com.adeo.gestachats.gitvisu: info
+
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+    info:
+      enabled: true
+    mappings:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info,mappings

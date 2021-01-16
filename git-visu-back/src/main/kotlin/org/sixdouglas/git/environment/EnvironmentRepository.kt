@@ -1,5 +1,5 @@
 package org.sixdouglas.git.environment
 
-import org.springframework.data.repository.reactive.ReactiveCrudRepository
+import org.springframework.data.repository.reactive.ReactiveSortingRepository
 
-internal interface EnvironmentRepository : ReactiveCrudRepository<Environment, Int>
+internal interface EnvironmentRepository : ReactiveSortingRepository<Environment, Int>

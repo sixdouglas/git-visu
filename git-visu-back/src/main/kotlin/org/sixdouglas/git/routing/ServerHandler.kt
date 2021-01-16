@@ -1,6 +1,6 @@
 package org.sixdouglas.git.routing
 
-import org.sixdouglas.git.deployment.ServerDeployment
+import org.sixdouglas.git.server.ServerDeployment
 import org.sixdouglas.git.server.IServerComponent
 import org.sixdouglas.git.server.Server
 import org.springframework.http.MediaType
