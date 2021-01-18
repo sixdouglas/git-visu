@@ -20,6 +20,12 @@
                     <input type="text" class="form-control" id="inputCode" maxlength="7" v-model="environment.code">
                 </div>
             </div>
+            <div class="form-group row mb-2 mt-2">
+                <label for="inputRole" class="col-sm-2 col-form-label">Role</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputRole" maxlength="7" v-model="environment.role">
+                </div>
+            </div>
             <div class="form-group row mb-2">
                 <label for="inputWeight" class="col-sm-2 col-form-label">Weight</label>
                 <div class="col-sm-10">
